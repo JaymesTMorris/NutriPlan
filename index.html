@@ -2,17 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Spoonacular Recipe Search</title>
-    <link rel="stylesheet" href="style.css">
+    <title>NutriPlan Login</title>
+    <link rel="stylesheet" href="styleLogin.css">
     
 </head>
 <body>
+    <div>
+        <h1>NutriPlan</h1>
+        <h2>Login</h2>
+        <form>
+            <label for="enterEmail">Email:</label><br>
+            <input type="email" id="emailEnter" placeholder="Enter email..."><br>
 
-    <h1>Recipe Finder</h1>
-    <input type="text" id="query" placeholder="Enter an ingredient or dish (e.g., pasta)">
-    <button onclick="searchRecipes()">Search</button>
+            <label for="enterPass">Password:</label><br>
+            <input type="password" id="emailPass" placeholder="Enter password..."><br>
 
-    <div id="results"></div>
+            <button type="submit">Log In</button>
+            <p>Don't have an account? <a href="signup.html">Create an Account</a></p>
+        </form>
+    </div>
+
+<!-- TODO: Prompts for Email, Password, Sign Up, and Log In -->
+
     <script src="script.js"></script>
 </body>
 </html>
