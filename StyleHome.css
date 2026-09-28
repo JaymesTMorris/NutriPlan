@@ -27,21 +27,17 @@ body
 
 .hero {
     min-height: 500px;
-
     display: flex;
     align-items: center;
-
     padding: 70px 10%;
-
     background-image:
         linear-gradient(
             rgba(247, 250, 245, 0.82),
             rgba(247, 250, 245, 0.82)
         ),
-        url("vegetables.jpg");
-
-    background-size: cover;
-    background-position: center;
+      url("vegetables.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .hero-content {
@@ -97,4 +93,25 @@ body
 
 .search-box button:hover {
     background-color: #4b7832;
+}
+/* Features */
+.features {
+text-align: center;
+padding: 30px 8%;
+}
+.features h2,
+.features h2 {
+font-zie: 32px;
+  margin-bottom: 10px;
+}
+.scetion-text{
+color: #69736a;
+margin-bottom: 40px;
+}
+
+.feature-container {
+display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
 }
