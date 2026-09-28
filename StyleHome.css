@@ -16,3 +16,85 @@ body
   justify-content: space-between;
   background-color: white;
 }
+.login-btn {
+    background-color: #5d913e;
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 7px;
+}
+
+/* Hero */
+
+.hero {
+    min-height: 500px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 70px 10%;
+
+    background-image:
+        linear-gradient(
+            rgba(247, 250, 245, 0.82),
+            rgba(247, 250, 245, 0.82)
+        ),
+        url("vegetables.jpg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero h1 {
+    font-size: 58px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #5d913e;
+}
+
+.hero p {
+    font-size: 19px;
+    line-height: 1.6;
+    color: #59645a;
+    margin-bottom: 30px;
+}
+
+
+/* Search */
+
+.search-box {
+    display: flex;
+    max-width: 600px;
+    background-color: white;
+    padding: 7px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px;
+    font-size: 16px;
+}
+
+.search-box button {
+    border: none;
+    background-color: #5d913e;
+    color: white;
+    padding: 0 25px;
+    border-radius: 7px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background-color: #4b7832;
+}
