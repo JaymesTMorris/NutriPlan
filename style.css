@@ -47,7 +47,7 @@ button:hover { background: #b84d2c; }
 }
 .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 9px 22px rgba(100, 60, 35, .16); }
 .recipe-card h3 { margin: 0; padding: 16px 16px 10px; color: #543329; font-size: 19px; }
-.recipe-card img { display: block; width: 100%; height: 170px; object-fit: cover; }
+.recipe-card img { display: block; width: 5ch; height: 170px; object-fit: cover; }
 .recipe-card p { margin: 0; padding: 0 16px 18px; }
 .recipe-card a { color: #c45230; font-weight: bold; text-decoration: none; }
 .recipe-card a:hover { text-decoration: underline; }
