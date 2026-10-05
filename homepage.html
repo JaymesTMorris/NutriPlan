@@ -1,64 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>NutriPlan Login</title>
-    <link rel="stylesheet" href="styleLogin.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="stylehome.css">
 </head>
+
 <body>
-   <!-- Nav Bar -->
+
+    <!-- Nav Bar -->
     <header>
         <nav class="navbar">
-            <div class="logo">
-                <img src="Logo.png" alt="NutriPlan Logo" style="width: 100%">
-            </div>
-            <div class="nav-links">
-                <a href="index.html">Home</a> 
-                <a href="search.html">Search</a>
-                <!--more links to be added such as Favorites, About  -->
-                <a></a>
-                <a></a>
 
+            <div class="logo">
+             <img src="Logo.png" alt="NutriPlan Logo">
             </div>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="favorites.html">Favorites</a>
+                <a href="#">About</a>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+
         </nav>
     </header>
 
-<!--Hero Section  -->
+
+    <!-- Hero Section -->
     <section class="hero">
 
-            <div class="hero-content">
-                <h1>
-                    Eat Healthy.<br>
-                    Live Healthy.
-                </h1>
-                <p>
-                    Discover delicious vegetarian recipes.
-                </p>
-    <!--Search box-->
-                <div class="search-box">
-                    <input
-                        type= "text"
-                        id="query"
-                        placeholder="Search for a recipe.."
-                    >
-                    <button onclick="searchRecipes()">Search</button>
-                </div>
+        <div class="hero-content">
+
+            <h1>
+                Eat Healthy.<br>
+                <span>Live Healthy.</span>
+            </h1>
+
+            <p>
+                Discover delicious vegetarian recipes.
+            </p>
+
+            <!-- Search -->
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="query"
+                    placeholder="Search for a recipe..."
+                >
+                <button onclick="searchRecipes()"> Search </button>
             </div>
+
+        </div>
+
     </section>
+
+
     <!-- Features -->
     <section class="features">
 
         <h2>Explore NutriPlan</h2>
-        
+
         <p class="section-text">
             we can add text here if needed.
         </p>
-        
+
+
         <div class="feature-container">
-            
+
             <div class="feature-card">
-                
                 <div class="feature-icon"></div>
 
                 <h3>Find Recipes</h3>
@@ -68,8 +80,8 @@
                 </p>
             </div>
 
+
             <div class="feature-card">
-                
                 <div class="feature-icon"></div>
 
                 <h3>Nutrition Information</h3>
@@ -81,7 +93,6 @@
 
 
             <div class="feature-card">
-                
                 <div class="feature-icon"></div>
 
                 <h3>Save & Rate</h3>
@@ -95,8 +106,21 @@
 
     </section>
 
-<!-- TODO: Prompts for Email, Password, Sign Up, and Log In -->
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="logo">
+            <img src="logo.png" alt="NutriPlan Logo">
+        </div>
+        <p>
+            2026 NutriPlan
+        </p>
+
+    </footer>
+
 
     <script src="script.js"></script>
+
 </body>
 </html>
