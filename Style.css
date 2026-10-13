@@ -1,0 +1,98 @@
+
+/* Shared styles for NutriPlan */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7faf5;
+    color: #263b2a;
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+    width: 100%;
+    height: 70px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.logo img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #344638;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #5d913e;
+}
+
+.login-btn {
+    background-color: #5d913e;
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 7px;
+}
+
+.login-btn:hover {
+    background-color: #4b7832;
+}
+
+/* Shared feature layout */
+.feature-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+/* Shared footer */
+footer {
+    text-align: center;
+    padding: 40px;
+    background-color: #263b2a;
+    color: white;
+}
+
+footer p {
+    color: #dce5dc;
+}
+
+/* Responsive navigation */
+@media (max-width: 768px) {
+    .navbar {
+        height: auto;
+        min-height: 70px;
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 5%;
+    }
+
+    .nav-links {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
