@@ -247,6 +247,54 @@ body {
     flex-wrap: wrap;
 }
 
+/* Search results */
+.search-results {
+    padding: 30px 8%;
+}
+
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.recipe-card {
+    background-color: white;
+    width: 300px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.recipe-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.recipe-card a {
+    color: #5d913e;
+    text-decoration: none;
+}
+
+/* Featured recipe cards */
+.features .feature-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.features .feature-card a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #5d913e;
+    font-weight: bold;
+    text-decoration: none;
+}
 
 /* Homepage responsive layout */
 @media (max-width: 768px) {

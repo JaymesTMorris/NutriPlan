@@ -34,3 +34,40 @@ async function searchRecipes() {
         resultsDiv.innerHTML = 'Failed to fetch recipes. Check your API key or network.';
     }
 }
+
+// Featured recipes: 3 random vegetarian recipes, saved for the rest of the browser session
+  async function loadFeaturedRecipes() {
+      const featuredDiv = document.getElementById('featured');
+      let recipes = JSON.parse(sessionStorage.getItem('featuredRecipes'));
+
+      if (!recipes) {
+          try {
+              const response = await
+  fetch(`https://api.spoonacular.com/recipes/random?number=3&include-tags=vegetarian&apiKey=${API_KEY}`);
+              if (!response.ok) {
+                  throw new Error('Request failed');
+              }
+              const data = await response.json();
+              recipes = data.recipes;
+              sessionStorage.setItem('featuredRecipes', JSON.stringify(recipes));
+          } catch (error) {
+              featuredDiv.innerHTML = '<p>Could not load featured recipes.</p>';
+              return;
+          }
+      }
+
+      featuredDiv.innerHTML = '';
+      recipes.forEach(recipe => {
+          const card = document.createElement('div');
+          card.className = 'feature-card';
+          card.innerHTML = `
+              <img src="${recipe.image}" alt="${recipe.title}">
+              <h3>${recipe.title}</h3>
+              <p>Ready in ${recipe.readyInMinutes} min · Serves ${recipe.servings}</p>
+              <a href="${recipe.spoonacularSourceUrl}" target="_blank">View Recipe</a>
+          `;
+          featuredDiv.appendChild(card);
+      });
+  }
+
+  loadFeaturedRecipes();
