@@ -73,7 +73,7 @@ body {
             rgba(247, 250, 245, 0.82),
             rgba(247, 250, 245, 0.82)
         ),
-        url("vegetables.jpg");
+        url("../images/vegetables.jpg");
     background-size: cover;
     background-position: center;
 }
