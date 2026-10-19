@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylehome.css">
+</head>
+
+<body>
+
+    <!-- Nav Bar -->
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+             <img src="Logo.png" alt="NutriPlan Logo">
+            </div>
+
+            <div class="nav-links">
+                <a href="homepage.html">Home</a>
+                <a href="favorites.html">Favorites</a>
+                <a href="GroceryList.html">Grocery List</a>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+            <p class="eyebrow">WELCOME TO NUTRIPLAN</p>
+            <h1>
+                Eat Healthy.<br>
+                <span>Live Healthy.</span>
+            </h1>
+
+            <p>
+                Discover delicious vegetarian recipes and make healthy eating a little easier every day.
+            </p>
+
+            <!-- Search -->
+            <div class="search-box">
+    <input
+        type="text"
+        id="query"
+        placeholder="Search for a recipe..."
+    >
+    <button onclick="goToRecipeSearch()">Search</button>
+</div>
+
+        </div>
+
+        <div class="image-slider">
+            <div class="slides">
+                <img src="Img1.jpeg">
+                <img src="Img2.jpeg">
+                <img src="Img3.jpeg">
+                <img src="Img4.jpg">
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="mission">
+        <h2>OUR PURPOSE</h2>
+        <p>
+            NutriPlan helps users explore vegetarian recipes,
+            view nutritional information, and keep their favorite
+            meals organized in one convenient place.
+            We want to make discovering healthy meal ideas simple
+            and enjoyable.
+        </p>
+    </section>
+    <!-- Features -->
+    <section class="features">
+
+        <h2>Featured Recipes</h2>
+
+        <p class="section-text">
+        Try our featured recipes
+        </p>
+
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+
+                <h3>Recipe 1</h3>
+
+                <p>
+                    API
+                </p>
+            </div>
+
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+
+                <h3>Recipe 2</h3>
+
+                <p>
+                    API
+                </p>
+            </div>
+
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+
+                <h3>Recipe 3</h3>
+
+                <p>
+                    from API
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="about">
+        <h2>Your Next Favorite Meal Awaits</h2>
+        <p>Start exploring vegetarian recipes with NutriPlan.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="logo">
+            <img src="Logo.png" alt="NutriPlan Logo">
+        </div>
+        <p>
+            2026 NutriPlan
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
