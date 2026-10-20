@@ -49,8 +49,23 @@
 
             <h2>Add Grocery Items</h2>
             <p class="section-text">
-                Add the items your family needs to buy.
+                Add ingredients manually or from your favorite recipes.
             </p>
+
+            <form id="groceryForm">
+                <input
+                    type="text"
+                    id="groceryInput"
+                    placeholder="Enter grocery item..."
+                    required
+                >
+                <button type="submit">Add Item</button>
+            </form>
+
+            <p id="groceryMessage"></p>
+            <ul id="groceryItems"></ul>
+
+        </section>
 
     </main>
 
@@ -65,5 +80,107 @@
 
     </footer>
 
+<script>
+const API = 'http://localhost:3000/api/grocery';
+const form = document.getElementById('groceryForm');
+const input = document.getElementById('groceryInput');
+const list = document.getElementById('groceryItems');
+const message = document.getElementById('groceryMessage');
+
+function getUser() {
+    const saved = sessionStorage.getItem('nutriplanUser');
+    return saved ? JSON.parse(saved) : null;
+}
+
+async function loadItems() {
+    const user = getUser();
+
+    if (!user) {
+        message.textContent = 'Please log in first.';
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API}/${user.id}`);
+        const data = await response.json();
+
+        if (!response.ok) throw new Error(data.error);
+
+        list.innerHTML = '';
+
+        data.items.forEach(item => {
+            const li = document.createElement('li');
+            const check = document.createElement('input');
+            check.type = 'checkbox';
+            check.checked = Boolean(item.checked);
+
+            check.onchange = async () => {
+                await fetch(`${API}/${user.id}/${item.id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ checked: check.checked })
+                });
+                loadItems();
+            };
+
+            const name = document.createElement('span');
+            name.textContent = ' ' + item.item_name + ' ';
+
+            const remove = document.createElement('button');
+            remove.textContent = 'Remove';
+            remove.onclick = async () => {
+                await fetch(`${API}/${user.id}/${item.id}`, {
+                    method: 'DELETE'
+                });
+                loadItems();
+            };
+
+            li.append(check, name, remove);
+            list.appendChild(li);
+        });
+
+        message.textContent = data.items.length
+            ? `${data.items.length} item(s) on your list.`
+            : 'Your grocery list is empty.';
+    } catch (error) {
+        message.textContent = 'Could not load grocery list. Check your backend.';
+    }
+}
+
+form.addEventListener('submit', async event => {
+    event.preventDefault();
+
+    const user = getUser();
+    if (!user) {
+        message.textContent = 'Please log in before adding items.';
+        return;
+    }
+
+    try {
+        const response = await fetch(API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: user.id,
+                itemName: input.value.trim()
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            message.textContent = data.error || 'Could not add item.';
+            return;
+        }
+
+        input.value = '';
+        loadItems();
+    } catch (error) {
+        message.textContent = 'Could not connect to the backend.';
+    }
+});
+
+loadItems();
+</script>
 </body>
 </html>

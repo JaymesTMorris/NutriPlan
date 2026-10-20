@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorite Recipes - NutriPlan</title>
+    <link rel="stylesheet" href="assets/css/home.css">
+    <style>
+        .favorites-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .favorite-card {
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            color: #222;
+            box-shadow: 0 2px 8px #0002;
+        }
+
+        .favorite-card button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        #favoritesMessage {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="favorites-container">
+        <h1>My Favorite Recipes</h1>
+        <p id="favoritesMessage">Loading your favorites...</p>
+        <div id="favoritesList" class="favorites-grid"></div>
+        <p><a href="index.html">Back to Home</a></p>
+    </div>
+
+    <script>
+        async function loadFavorites() {
+            const savedUser = sessionStorage.getItem('nutriplanUser');
+            const message = document.getElementById('favoritesMessage');
+            const list = document.getElementById('favoritesList');
+
+            if (!savedUser) {
+                message.textContent = 'Please log in to view your favorites.';
+                return;
+            }
+
+            try {
+                const user = JSON.parse(savedUser);
+                const response = await fetch(
+                    `http://localhost:3000/api/favorites/${user.id}`
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    message.textContent = data.error || 'Could not load favorites.';
+                    return;
+                }
+
+                const favorites = Array.isArray(data) ? data : data.favorites;
+
+                if (!Array.isArray(favorites) || favorites.length === 0) {
+                    message.textContent = 'You have not saved any favorites yet.';
+                    return;
+                }
+
+                message.textContent = '';
+                list.innerHTML = '';
+
+                favorites.forEach(recipe => {
+                    const card = document.createElement('div');
+                    card.className = 'favorite-card';
+
+                    const title = document.createElement('h3');
+                    title.textContent = recipe.recipe_name;
+
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove Favorite';
+                    removeButton.addEventListener('click', () => {
+                        removeFavorite(user.id, recipe.recipe_id);
+                    });
+
+                    card.appendChild(title);
+                    card.appendChild(removeButton);
+                    list.appendChild(card);
+                });
+            } catch (error) {
+                console.error(error);
+                message.textContent = 'Could not connect to the backend. Make sure it is running.';
+            }
+        }
+
+        async function removeFavorite(userId, recipeId) {
+            try {
+                const response = await fetch(
+                    `http://localhost:3000/api/favorites/${userId}/${encodeURIComponent(recipeId)}`,
+                    { method: 'DELETE' }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(data.error || 'Could not remove favorite.');
+                    return;
+                }
+
+                loadFavorites();
+            } catch (error) {
+                alert('Could not connect to the backend.');
+            }
+        }
+
+        loadFavorites();
+    </script>
+</body>
+</html>
