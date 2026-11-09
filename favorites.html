@@ -5,12 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Favorite Recipes - NutriPlan</title>
     <link rel="stylesheet" href="assets/css/home.css">
-    <style>
-        .favorites-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+<style>
+
+body {
+    background:
+        linear-gradient(rgba(247, 250, 245, 0.82),
+                        rgba(247, 250, 245, 0.82)),
+        url("assets/images/vegetables.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    font-family: Arial, sans-serif;
+    color: #263b2a;
+    min-height: 100vh;
+}
+
+.favorites-container {
+    max-width: 1250px;
+    margin: 50px auto;
+    padding: 25px;
+}
+
+.favorites-container h1 {
+    font-size: 36px;
+    color: #263b2a;
+    margin-bottom: 15px;
+}
+
+#favoritesMessage {
+    color: #647564;
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.favorite-card {
+    background: white;
+    border: 2px solid #527f38;
+    border-radius: 16px;
+    padding: 25px;
+    min-height: 180px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    transition: 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.favorite-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.favorite-card h3 {
+    color: #263b2a;
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+.favorite-card button {
+    background: #5d913e;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 7px;
+    font-size: 14px;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.favorite-card button:hover {
+    background: #426e2e;
+}
+
+.favorites-container a {
+    display: inline-block;
+    margin-top: 30px;
+    color: #5d913e;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.favorites-container a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .favorites-container {
+        padding: 18px;
+    }
+
+    .favorites-container h1 {
+        font-size: 28px;
+    }
+
+    .favorites-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+</head>
+<body>
 
  <!-- Nav Bar -->
     <header>
