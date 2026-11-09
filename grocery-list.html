@@ -8,7 +8,7 @@
 
     <title>Grocery List | NutriPlan</title>
 
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/groceryList.css">
 </head>
 
 <body>
@@ -50,16 +50,17 @@
             <h2>Add Grocery Items</h2>
             <p class="section-text">
                 Add ingredients manually or from your favorite recipes.
-            </p>
+            </p><br>
 
-            <form id="groceryForm">
+            <form id="groceryForm" class="groceryForm">
                 <input
                     type="text"
                     id="groceryInput"
+                    class="groceryInput"
                     placeholder="Enter grocery item..."
                     required
                 >
-                <button type="submit">Add Item</button>
+                <button type="submit" class="groceryButton">Add Item</button><br><br>
             </form>
 
             <p id="groceryMessage"></p>
