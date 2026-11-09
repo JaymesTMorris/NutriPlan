@@ -12,31 +12,24 @@
             padding: 20px;
         }
 
-        .favorites-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-        }
+ <!-- Nav Bar -->
+    <header>
+        <nav class="navbar">
 
-        .favorite-card {
-            padding: 20px;
-            border-radius: 10px;
-            background: white;
-            color: #222;
-            box-shadow: 0 2px 8px #0002;
-        }
+            <div class="logo">
+             <img src="assets/images/logo.png" alt="NutriPlan Logo">
+            </div>
 
-        .favorite-card button {
-            padding: 8px 12px;
-            cursor: pointer;
-        }
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="favorites.html">Favorites</a>
+                <a href="grocery-list.html">Grocery List</a>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
 
-        #favoritesMessage {
-            margin: 20px 0;
-        }
-    </style>
-</head>
-<body>
+        </nav>
+    </header>
+
     <div class="favorites-container">
         <h1>My Favorite Recipes</h1>
         <p id="favoritesMessage">Loading your favorites...</p>
@@ -86,7 +79,7 @@
                     title.textContent = recipe.recipe_name;
 
                     const removeButton = document.createElement('button');
-                    removeButton.textContent = 'Remove Favorite';
+                    removeButton.textContent = 'Remove';
                     removeButton.addEventListener('click', () => {
                         removeFavorite(user.id, recipe.recipe_id);
                     });
