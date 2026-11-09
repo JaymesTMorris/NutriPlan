@@ -8,7 +8,7 @@
 
     <title>Grocery List | NutriPlan</title>
 
-    <link rel="stylesheet" href="assets/css/groceryList.css">
+    <link rel="stylesheet" href="assets/css/home.css">
 </head>
 
 <body>
@@ -50,17 +50,16 @@
             <h2>Add Grocery Items</h2>
             <p class="section-text">
                 Add ingredients manually or from your favorite recipes.
-            </p><br>
+            </p>
 
-            <form id="groceryForm" class="groceryForm">
+            <form id="groceryForm">
                 <input
                     type="text"
                     id="groceryInput"
-                    class="groceryInput"
                     placeholder="Enter grocery item..."
                     required
                 >
-                <button type="submit" class="groceryButton">Add Item</button><br><br>
+                <button type="submit">Add Item</button>
             </form>
 
             <p id="groceryMessage"></p>
@@ -88,6 +87,43 @@ const input = document.getElementById('groceryInput');
 const list = document.getElementById('groceryItems');
 const message = document.getElementById('groceryMessage');
 
+// Automatically identify grocery categories
+function getCategory(itemName) {
+    const item = itemName.toLowerCase();
+
+    const categories = {
+        "Produce": [
+            "apple", "banana", "orange", "avocado", "spinach",
+            "lettuce", "tomato", "potato", "onion", "carrot",
+            "broccoli", "cucumber", "pepper", "garlic", "lemon",
+            "berry", "strawberry", "grape", "mushroom", "eggplant"
+        ],
+
+        "Meat & Seafood": [
+            "chicken", "beef", "pork", "turkey", "salmon",
+            "fish", "shrimp", "steak", "bacon", "sausage", "tuna"
+        ],
+
+        "Dairy & Eggs": [
+            "milk", "cheese", "yogurt", "butter", "cream",
+            "egg", "mozzarella", "cheddar"
+        ],
+
+        "Grains & Bakery": [
+            "bread", "rice", "pasta", "flour", "oat",
+            "cereal", "bagel", "tortilla", "quinoa"
+        ]
+    };
+
+    for (const category in categories) {
+        if (categories[category].some(food => item.includes(food))) {
+            return category;
+        }
+    }
+
+    return "Pantry & Other";
+}
+
 function getUser() {
     const saved = sessionStorage.getItem('nutriplanUser');
     return saved ? JSON.parse(saved) : null;
@@ -109,49 +145,94 @@ async function loadItems() {
 
         list.innerHTML = '';
 
+        // Group grocery items by category
+        const groupedItems = {};
+
         data.items.forEach(item => {
-            const li = document.createElement('li');
-            const check = document.createElement('input');
-            check.type = 'checkbox';
-            check.checked = Boolean(item.checked);
+            const category = getCategory(item.item_name);
 
-            check.onchange = async () => {
-                await fetch(`${API}/${user.id}/${item.id}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ checked: check.checked })
-                });
-                loadItems();
-            };
+            if (!groupedItems[category]) {
+                groupedItems[category] = [];
+            }
 
-            const name = document.createElement('span');
-            name.textContent = ' ' + item.item_name + ' ';
+            groupedItems[category].push(item);
+        });
 
-            const remove = document.createElement('button');
-            remove.textContent = 'Remove';
-            remove.onclick = async () => {
-                await fetch(`${API}/${user.id}/${item.id}`, {
-                    method: 'DELETE'
-                });
-                loadItems();
-            };
+        // Display categories in a consistent order
+        const categoryOrder = [
+            "Produce",
+            "Meat & Seafood",
+            "Dairy & Eggs",
+            "Grains & Bakery",
+            "Pantry & Other"
+        ];
 
-            li.append(check, name, remove);
-            list.appendChild(li);
+        categoryOrder.forEach(category => {
+
+            if (!groupedItems[category]) return;
+
+            // Category heading
+            const heading = document.createElement('li');
+            heading.textContent = category;
+            heading.className = 'grocery-category';
+            list.appendChild(heading);
+
+            // Display items within category
+            groupedItems[category].forEach(item => {
+
+                const li = document.createElement('li');
+
+                const check = document.createElement('input');
+                check.type = 'checkbox';
+                check.checked = Boolean(item.checked);
+
+                check.onchange = async () => {
+                    await fetch(`${API}/${user.id}/${item.id}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            checked: check.checked
+                        })
+                    });
+
+                    loadItems();
+                };
+
+                const name = document.createElement('span');
+                name.textContent = ' ' + item.item_name + ' ';
+
+                const remove = document.createElement('button');
+                remove.textContent = 'Remove';
+
+                remove.onclick = async () => {
+                    await fetch(`${API}/${user.id}/${item.id}`, {
+                        method: 'DELETE'
+                    });
+
+                    loadItems();
+                };
+
+                li.append(check, name, remove);
+                list.appendChild(li);
+            });
         });
 
         message.textContent = data.items.length
             ? `${data.items.length} item(s) on your list.`
             : 'Your grocery list is empty.';
+
     } catch (error) {
+        console.error(error);
         message.textContent = 'Could not load grocery list. Check your backend.';
     }
 }
 
+// Add grocery items
 form.addEventListener('submit', async event => {
     event.preventDefault();
 
     const user = getUser();
+
     if (!user) {
         message.textContent = 'Please log in before adding items.';
         return;
@@ -176,6 +257,7 @@ form.addEventListener('submit', async event => {
 
         input.value = '';
         loadItems();
+
     } catch (error) {
         message.textContent = 'Could not connect to the backend.';
     }

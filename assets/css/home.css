@@ -350,3 +350,13 @@ footer p {
         gap: 15px;
     }
 }
+.grocery-category {
+    list-style: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3b8050;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #dce8dc;
+}
