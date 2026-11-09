@@ -61,9 +61,8 @@ body {
 
 
 /* Homepage hero */
-.hero {
-    min-height: 500px;
-    display: flex;
+.grocery-hero {
+    min-height: 200px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -77,6 +76,85 @@ body {
         url("../images/vegetables.jpg");
     background-size: cover;
     background-position: center;
+}
+
+.grocery-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px 20%;
+}
+
+.grocery-card {
+    background-color: white;
+    width: auto;
+    padding: 50px;
+    border: 3px solid #4b7832;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+#groceryItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#groceryItems li {
+    display: flex;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-bottom: 2px dotted #4b7832;
+}
+
+#groceryItems li button {
+    margin-left: auto;
+}
+
+#groceryItems li button:hover {
+    background-color: #4b7832;
+}
+
+.groceryForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.groceryInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #4b7832;
+    border-radius: 7px;
+}
+
+.groceryButton {
+    background-color: #5d913e;
+    border: 0px solid #5d913e;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+#groceryItems input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: #5d913e;
+}
+
+.groceryButton:hover {
+    background-color: #4b7832;
+}
+
+button{
+    border: none;
+    background-color: #5d913e;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 7px;
+    cursor: pointer;
 }
 
 .hero-content {
@@ -173,8 +251,8 @@ body {
 }
 
 .eyebrow {
-    color: #4c7948;
-    font-size: 13px;
+    color: #59645a;
+    font-size: 19px;
     font-weight: bold;
     letter-spacing: 2px;
     margin-bottom: 12px;

@@ -11,7 +11,7 @@ async function searchRecipes() {
     }
 
     try {
-        const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${encodeURIComponent(query)}&number=5&apiKey=${API_KEY}`);
+        const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${encodeURIComponent(query)}&number=5&diet=vegetarian&apiKey=${API_KEY}`);
         const data = await response.json();
 
         if (data.results.length === 0) {
@@ -51,7 +51,7 @@ async function searchRecipes() {
       if (!recipes) {
           try {
               const response = await
-  fetch(`https://api.spoonacular.com/recipes/random?number=3&include-tags=vegetarian&apiKey=${API_KEY}`);
+  fetch(`https://api.spoonacular.com/recipes/random?number=3&tags=vegetarian&apiKey=${API_KEY}`);
               if (!response.ok) {
                   throw new Error('Request failed');
               }
