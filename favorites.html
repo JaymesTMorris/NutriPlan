@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -212,20 +211,8 @@ body {
                     viewButton.className = 'view-button';
 
                     viewButton.addEventListener('click', () => {
-
-                        const recipeSlug = recipe.recipe_name
-                            .replace(/[^a-zA-Z0-9]+/g, '-')
-                            .replace(/^-|-$/g, '');
-
-                        const recipeUrl =
-                            `https://spoonacular.com/recipes/${recipeSlug}-${recipe.recipe_id}`;
-
-                        window.open(
-                            recipeUrl,
-                            '_blank',
-                            'noopener,noreferrer'
-                        );
-
+                        window.location.href =
+                            `recipe.html?id=${encodeURIComponent(recipe.recipe_id)}`;
                     });
 
                     // Remove Favorite Button
