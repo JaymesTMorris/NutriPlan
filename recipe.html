@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe - NutriPlan</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 16px; line-height: 1.5; }
+        img { max-width: 100%; }
+    </style>
+</head>
+<body>
+    <p><a href="index.html">&larr; Back to Home</a></p>
+    <div id="recipe">Loading...</div>
+
+    <script>
+        const API_KEY = '9d6176d44ca441b59f4e89e2efc59118';
+        const recipeDiv = document.getElementById('recipe');
+        const id = new URLSearchParams(window.location.search).get('id');
+
+        async function loadRecipe() {
+            if (!id) {
+                recipeDiv.textContent = 'No recipe selected.';
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `https://api.spoonacular.com/recipes/${encodeURIComponent(id)}/information?apiKey=${API_KEY}`
+                );
+                const recipe = await response.json();
+
+                if (!response.ok) {
+                    recipeDiv.textContent = recipe.message || 'Could not load this recipe.';
+                    return;
+                }
+
+                document.title = `${recipe.title} - NutriPlan`;
+                recipeDiv.innerHTML = '';
+
+                const title = document.createElement('h1');
+                title.textContent = recipe.title;
+                recipeDiv.appendChild(title);
+
+                if (recipe.image) {
+                    const img = document.createElement('img');
+                    img.src = recipe.image;
+                    img.alt = recipe.title;
+                    recipeDiv.appendChild(img);
+                }
+
+                const info = document.createElement('p');
+                info.textContent = `Ready in ${recipe.readyInMinutes} min · Serves ${recipe.servings}`;
+                recipeDiv.appendChild(info);
+
+                // Spoonacular's summary contains trusted-ish HTML (bold tags, links); strip links out
+                if (recipe.summary) {
+                    const summary = document.createElement('p');
+                    summary.innerHTML = recipe.summary.replace(/<a\b[^>]*>(.*?)<\/a>/gi, '$1');
+                    recipeDiv.appendChild(summary);
+                }
+
+                const ingHeading = document.createElement('h2');
+                ingHeading.textContent = 'Ingredients';
+                recipeDiv.appendChild(ingHeading);
+
+                const ingList = document.createElement('ul');
+                (recipe.extendedIngredients || []).forEach(ing => {
+                    const li = document.createElement('li');
+                    li.textContent = ing.original || ing.name;
+                    ingList.appendChild(li);
+                });
+                recipeDiv.appendChild(ingList);
+
+                const stepHeading = document.createElement('h2');
+                stepHeading.textContent = 'Instructions';
+                recipeDiv.appendChild(stepHeading);
+
+                const steps = (recipe.analyzedInstructions || []).flatMap(section => section.steps || []);
+                if (steps.length) {
+                    const stepList = document.createElement('ol');
+                    steps.forEach(step => {
+                        const li = document.createElement('li');
+                        li.textContent = step.step;
+                        stepList.appendChild(li);
+                    });
+                    recipeDiv.appendChild(stepList);
+                } else if (recipe.instructions) {
+                    const p = document.createElement('p');
+                    p.textContent = recipe.instructions.replace(/<[^>]*>/g, ' ');
+                    recipeDiv.appendChild(p);
+                } else {
+                    const p = document.createElement('p');
+                    p.textContent = 'No instructions available.';
+                    recipeDiv.appendChild(p);
+                }
+            } catch (error) {
+                console.error(error);
+                recipeDiv.textContent = 'Failed to load recipe. Check your API key or network.';
+            }
+        }
+
+        loadRecipe();
+    </script>
+</body>
+</html>

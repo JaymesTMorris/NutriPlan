@@ -181,7 +181,10 @@ body {
                     card.className = 'favorite-card';
 
                     const title = document.createElement('h3');
-                    title.textContent = recipe.recipe_name;
+                    const titleLink = document.createElement('a');
+                    titleLink.href = `recipe.html?id=${encodeURIComponent(recipe.recipe_id)}`;
+                    titleLink.textContent = recipe.recipe_name;
+                    title.appendChild(titleLink);
 
                     const removeButton = document.createElement('button');
                     removeButton.textContent = 'Remove';

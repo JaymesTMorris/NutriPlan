@@ -26,7 +26,7 @@ async function searchRecipes() {
             card.innerHTML = `
                 <h3>${recipe.title}</h3>
                 <img src="${recipe.image}" alt="${recipe.title}">
-                <p><a href="https://spoonacular.com/recipes/${recipe.title.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '')}-${recipe.id}" target="_blank" rel="noopener noreferrer">View Recipe Details</a></p>
+                <p><a href="recipe.html?id=${recipe.id}">View Recipe Details</a></p>
                 <button class="favorite-btn" type="button">♡ Favorite</button>
                 <button class="grocery-btn" type="button">Add Ingredients to Grocery List</button>
             `;
@@ -72,7 +72,7 @@ async function searchRecipes() {
               <img src="${recipe.image}" alt="${recipe.title}">
               <h3>${recipe.title}</h3>
               <p>Ready in ${recipe.readyInMinutes} min · Serves ${recipe.servings}</p>
-              <a href="${recipe.spoonacularSourceUrl}" target="_blank">View Recipe</a>
+              <a href="recipe.html?id=${recipe.id}">View Recipe</a>
           `;
           featuredDiv.appendChild(card);
       });
